@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="google-site-verification" content="ICWadNm1UEY-5aRTBxc256vuceTrpLu27thxOlF7GGw" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>コーキング必要本数計算ツール | シーリング材のm数・量出しに【現場用】</title>
+    <meta name="description" content="目地の幅・深さ・長さから、必要なコーキング（シーリング）材の本数を一発計算。333mlカートリッジ対応。ロス率も考慮。現場でスマホからすぐ使える無料ツールです。">
+    <meta name="keywords" content="コーキング,計算,本数,シーリング,m数,必要量,シミュレーション">
+    <meta property="og:title" content="コーキング必要本数計算ツール">
+    <meta property="og:description" content="幅×深さ×長さで必要本数を自動計算！買い出し前の数量確認に。">
+    <meta property="og:type" content="website">
+
+    <!-- AEO対策: 構造化データ (Schema.org JSON-LD) -->
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "コーキング必要本数計算ツール",
+        "description": "目地の幅・深さ・長さから、必要なコーキング（シーリング）材の本数を自動計算。330mlカートリッジ対応、ロス率20%考慮。現場でスマホから無料で使えます。",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "JPY"
+        },
+        "featureList": [
+            "コーキング材必要本数の自動計算",
+            "330mlカートリッジ対応",
+            "ロス率20%を自動加算",
+            "結果のコピー機能",
+            "スマートフォン対応"
+        ]
+    }
+    </script>
+
+    <!-- FAQPage Schema - AI検索で引用されやすい -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "コーキング材の必要本数はどうやって計算する？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "コーキング材の必要本数は「目地の幅(mm) × 深さ(mm) × 長さ(m)」で体積を計算し、ロス率（通常20%）を加算した上で、カートリッジ容量（通常330ml）で割って算出します。例：10mm × 10mm × 10m = 1000ml、ロス率20%加算で1200ml、330mlカートリッジなら4本必要です。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "コーキング材のロス率は何パーセントが適正？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "コーキング材のロス率は一般的に10%〜20%です。国土交通省の積算基準では18%、多くのメーカーやプロの現場では20%を採用しています。ロスの原因は、マスキングテープへの付着、ガンやノズルに残る材料、施工ミスによるやり直しなどです。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "330mlカートリッジ1本で何メートル施工できる？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "330mlカートリッジ1本で施工できる長さは目地のサイズによって異なります。目地幅10mm×深さ10mmの場合、ロス率20%を考慮すると約2.75m施工可能です。目地幅5mm×深さ5mmなら約11m施工できます。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- HowTo Schema - 使い方の手順 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "コーキング材の必要本数を計算する方法",
+        "description": "目地の寸法から必要なコーキング材の本数を計算する手順",
+        "totalTime": "PT1M",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "施工する長さを入力",
+                "text": "コーキングを施工する目地の総延長（メートル）を入力します。"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "目地の幅を入力",
+                "text": "目地の幅（ミリメートル）を入力します。一般的な外壁目地は10mm程度です。"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "目地の深さを入力",
+                "text": "目地の深さ（ミリメートル）を入力します。バックアップ材がある場合は、バックアップ材までの深さを入力します。"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "計算結果を確認",
+                "text": "自動的に計算され、必要なカートリッジ本数と総使用量（ml）が表示されます。ロス率20%が自動的に加算されています。"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        /* CSSはさっきと同じままでOKですが、少し見やすく微調整しました */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #444;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 18px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            /* 初期は非表示 */
+        }
+
+        .result-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1565c0;
+            line-height: 1.2;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        /* ボタンコンテナ（横並び用） */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .btn-clear {
+            background-color: #6c757d;
+            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        }
+
+        .btn-copy {
+            background-color: #28a745;
+            box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+        }
+
+        .btn-copy:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* 収益化ボタンのデザイン */
+        .affiliate-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background: #ff9900;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(255, 153, 0, 0.3);
+        }
+
+        .affiliate-link:hover {
+            background: #e68a00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>コーキング必要本数 計算機</h1>
+
+        <div class="form-group">
+            <label>施工する長さ (メートル)</label>
+            <input type="number" id="length" placeholder="例: 10" inputmode="decimal" min="0" oninput="calculate()">
+        </div>
+
+        <div class="form-group">
+            <label>目地の幅 (ミリ)</label>
+            <input type="number" id="width" placeholder="例: 10" inputmode="decimal" min="0" oninput="calculate()">
+        </div>
+
+        <div class="form-group">
+            <label>目地の深さ (ミリ)</label>
+            <input type="number" id="depth" placeholder="例: 10" inputmode="decimal" min="0" oninput="calculate()">
+        </div>
+
+        <div class="button-group">
+            <button class="btn-clear" onclick="clearAll()">クリア</button>
+            <button class="btn-copy" id="copyBtn" onclick="copyResult()" disabled>結果をコピー</button>
+        </div>
+
+        <div class="result-box" id="resultArea" style="display:none;">
+            必要な本数は...<br>
+            <span class="result-number" id="resultCount">0</span> 本<br>
+            <span style="font-size:14px;">(使用量:約 <span id="resultMl">0</span> ml)</span>
+        </div>
+
+        <div id="adArea" style="display:none; margin-top: 20px;">
+            <a href="https://www.amazon.co.jp/s?k=コーキング材&tag=YOUR_AMAZON_ID" target="_blank" class="affiliate-link">
+                Amazonでコーキング材を探す ➔
+            </a>
+        </div>
+
+        <p class="note">
+            ※一般的な330mlカートリッジ、ロス率20%で計算しています。<br>
+            ※計算結果は目安です。施工環境により変動します。
+        </p>
+    </div>
+
+    <script>
+        function calculate(showAlert = false) {
+            // 1. 入力値を取得する
+            const len = parseFloat(document.getElementById('length').value);
+            const wid = parseFloat(document.getElementById('width').value);
+            const dep = parseFloat(document.getElementById('depth').value);
+
+            // 入力が空だったり数字じゃない場合のチェック
+            // showAlertがtrueの時（ボタンクリック時）のみアラートを表示
+            if (isNaN(len) || isNaN(wid) || isNaN(dep)) {
+                if (showAlert) {
+                    alert("すべての項目に数字を入力してください");
+                }
+                return;
+            }
+
+            // 負の値チェック
+            if (len < 0 || wid < 0 || dep < 0) {
+                if (showAlert) {
+                    alert("0以上の数字を入力してください");
+                }
+                return;
+            }
+
+            // 2. 計算ロジック (ここがキモ！)
+            // 体積(ml) = 長さ(m) * 幅(mm) * 深さ(mm)
+            // 実は m * mm * mm の計算結果はそのまま ml (cc) になります
+            const volume = len * wid * dep;
+
+            // ロス率 20% を加算
+            const totalVolume = volume * 1.2;
+
+            // 330ml で割って、切り上げ (Math.ceil)
+            const tubes = Math.ceil(totalVolume / 330);
+
+            // 3. 結果を表示する
+            document.getElementById('resultCount').innerText = tubes;
+            document.getElementById('resultMl').innerText = Math.round(totalVolume); // mlは四捨五入
+            document.getElementById('resultArea').style.display = 'block';
+            // 広告エリアも表示する
+            document.getElementById('adArea').style.display = 'block';
+            // コピーボタンを有効化
+            document.getElementById('copyBtn').disabled = false;
+        }
+
+        // クリア機能
+        function clearAll() {
+            document.getElementById('length').value = '';
+            document.getElementById('width').value = '';
+            document.getElementById('depth').value = '';
+            document.getElementById('resultArea').style.display = 'none';
+            document.getElementById('adArea').style.display = 'none';
+            document.getElementById('copyBtn').disabled = true;
+        }
+
+        // 結果をコピー機能
+        function copyResult() {
+            const tubes = document.getElementById('resultCount').innerText;
+            const ml = document.getElementById('resultMl').innerText;
+            const len = document.getElementById('length').value;
+            const wid = document.getElementById('width').value;
+            const dep = document.getElementById('depth').value;
+
+            const text = `【コーキング材 必要本数】
+${tubes}本（約${ml}ml）
+
+条件：${len}m × 幅${wid}mm × 深さ${dep}mm
+※330mlカートリッジ、ロス率20%で計算`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                // コピー成功時のフィードバック
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.innerText;
+                btn.innerText = 'コピーしました！';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('コピーに失敗しました');
+            });
+        }
+    </script>
+
+</body>
+
+</html>
